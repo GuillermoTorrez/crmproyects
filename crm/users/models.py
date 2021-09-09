@@ -1,9 +1,12 @@
 # We will import the AbstractUser class which is meant to be used as a parent class for customer user classes.
 # We will also import the re module so that we can sanitize data using regular expressions.
 import re
+import datetime as dt  
+from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 class CustomUser(AbstractUser):
+    image = models.ImageField(upload_to='asset/images/profiles' + dt.datetime.now().strftime("%Y/%m/%d"),  blank=True, null=True  )
     # Every premade Django parent model class uses a method called clean() which is called every time the model is used.
     # This method is used for performing input sanitization and filtering in the model.
     # It can be overwritten to include additional filtering functionality.

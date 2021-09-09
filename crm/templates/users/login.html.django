@@ -1,0 +1,45 @@
+{% extends 'common/base.html.django' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<body class="app app-login p-0">    	
+    <div class="row g-0 app-auth-wrapper">
+	    <div class="col-12 auth-main-col text-center p-5">
+		    <div class="d-flex flex-column align-content-end">
+			    <div class="app-auth-body mx-auto">	
+				    <div class="app-auth-branding mb-2"><a class="app-logo" href="index.html"><img class="logo-icon me-2" src="{% static '/assets/images/app-logo.svg' %}" alt="logo"></a></div>
+					<h2 class="auth-heading text-center mb-5">Log in CRM</h2>
+			        <div class="auth-form-container text-start">
+						<form method="post" class="auth-form login-form"> 
+							{% csrf_token %}
+							{{ form|crispy }}
+								<div class="col-12 mt-2 d-flex flex-row-reverse">
+									<div class="forgot-password text-end">
+										<a href="{% url 'reset' %}">Forgot password?</a>
+									</div>
+								</div>
+								 <button class="btn mt-2 btn btn-primary w-100 theme-btn mx-auto" type="submit">Login</button>
+						<div class="auth-option text-center pt-3">No Account? <a class="text-link" href="{% url 'signup' %} >Sign up here </a><a> or Login with social media link.</a></div>
+					</div><!--//auth-form-container-->	
+			    </div><!--//auth-body-->
+				<div class="col-12 mt-2 flex-column justify-content-center">
+                    <a href="{% url 'reset' %}" class="btn mt-2 px-2 py-2 text-light">
+					<img src="{% static '/assets/images/instagram.svg' %}" width="30" height="30" alt="Login instagram"></a>
+					
+					<a href="{% url 'reset' %}" class="btn mt-2 px-2 py-2 btn text-light">
+					<img src="{% static '/assets/images/gmail.svg' %}" width="30" height="30" alt="Login Gmail"></a>
+					
+					<a href="{% url 'reset' %}" class="btn mt-2 px-2 py-2 text-light">
+					<img src="{% static '/assets/images/facebook.svg' %}" width="30" height="30" alt="Login facebook"></a>
+				</div>
+				</div>				
+				<footer class="app-auth-footer">
+				    <div class="container text-center py-3">
+			         <small class="copyright">Development with Python - Django by <a class="app-link" href="http://google.com" target="_blank">Guillermo Torrez</a> </small> 					      
+				    </div>
+			    </footer><!--//app-auth-footer-->	
+		    </div><!--//flex-column-->   
+	    </div><!--//auth-main-col-->
+	</div><!--//row-->
+</body>	
+{% endblock %}  

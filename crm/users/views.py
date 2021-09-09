@@ -4,5 +4,5 @@ from .forms import CustomUserCreationForm
 
 class SignUp(CreateView):
     form_class = CustomUserCreationForm
-    template_name = 'signup.html.django'
+    template_name = 'users/signup.html.django'
     success_url = reverse_lazy('login')

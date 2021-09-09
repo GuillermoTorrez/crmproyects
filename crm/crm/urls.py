@@ -30,12 +30,12 @@ from django.views.generic.base import TemplateView
 # We need to define a URL in our project's urls.py file for our Leads.
 
 urlpatterns = [
-    path('', TemplateView.as_view(template_name='crm/templates/welcome.html.django'), name='welcome'),
+    path('', TemplateView.as_view(template_name='common/welcome.html.django'), name='welcome'),
     # Next we will need to point to our users app the same way we did with the musicians and albums.
     path('users/', include('users.urls')),
     # We also need to create a second path which uses the same address as the previous users path but which access the django.contrib.auth.urls module instead.
     path('users/', include('django.contrib.auth.urls')),
     # This adds Django's premade user registration URLs into the users/ address.
     path('admin/', admin.site.urls),
-    path('__debug__/', include(debug_toolbar.urls)),
+    # /* <!-- path('__debug__/', include(debug_toolbar.urls)),
 ]

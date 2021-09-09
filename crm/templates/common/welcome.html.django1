@@ -1,0 +1,12 @@
+{% extends 'common/base.html.django' %} 
+{% block content %}
+    <h2>Welcome to CRM</h2>
+    {% if user.is_authenticated %}    
+        <p>Hi {{ user.username }} {{ user.first_name }} {{ user.last_name }}!</p>
+        <a href="{% url 'logout' %}" class="button">Logout</a>
+    {% else %}
+        <p>You are not logged in.</p>
+        <a class="btn btn-success" href="{% url 'login' %}" class="button">Login</a>
+        <a class="btn btn-success" href="{% url 'signup' %}" class="button">Sign Up</a>
+    {% endif %}
+{% endblock %}

@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -30,21 +30,32 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
-INSTALLED_APPS = [
-    'users.apps.UsersConfig',
+DEFAULT_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'crispy_forms',
-    'debug_toolbar',
+    
 ]
 
+THIRD_PARTY_APPS = [
+    # Add apps which you create install using pip
+    'crispy_forms',
+    # 'debug_toolbar',
+]
+
+LOCAL_APPS = [
+    # Add Local apps which you create using startapp
+    'users.apps.UsersConfig',
+]
+
+# Application definition
+INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 MIDDLEWARE = [
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    #'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -59,7 +70,7 @@ ROOT_URLCONF = 'crm.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -74,7 +85,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'crm.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
@@ -123,20 +133,20 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, '/static/')
 
 # You can also list any additonal static files directories by adding the STATICFILES_DIRS variable to the settings.py file and setting it to a lisst of paths to static files directories.
 # This is useful if you want to include static files which are used accross the whole project.
 # This variable is not provided by default and MUST be added for Django to find static files in the musiciansproject directory.
 
 STATICFILES_DIRS = [
-    BASE_DIR / 'crm/static'
+    BASE_DIR / 'static/'
 ]
 
 # All uploaded media such as image and audio files should be saved in a folder called /media which should be located in the root directory of hte project folder (in our case).
 # It is necessary to specify where the folder is by adding this code in our settings.py file.
 # This is not provided by default and must be added for Django's development server to find the uploaded media files.
 MEDIA_URL = '/media/'
-
 MEDIA_ROOT = BASE_DIR / 'media'
 
 # By default, Django provides a pre-written fully functional User model which can be used to create new users.
@@ -170,3 +180,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 INTERNAL_IPS = [
     '127.0.0.1',
 ]
+
+
+#try:
+#    from crm.local_settings import *
+#except ImportError:
+#    pass
